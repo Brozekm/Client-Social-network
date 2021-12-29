@@ -1,4 +1,30 @@
-<p>login works!</p>
-<div class="mat-card">
-  <h1>hello</h1>
+<div class="in-middle" style="width: 30vw; min-width: 20rem">
+  <mat-card>
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" >
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="user@gmail.com" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="yDa156.aF" formControlName="password">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="w-100 mb-3" [disabled]="!loginForm.valid">
+        Log in
+      </button>
+      </form>
+      <div>
+        <h3>Forgot password?
+          <button mat-button color="primary">Yup</button>
+        </h3>
+        <h4>I do not have an account...
+          <button mat-button color="primary" (click)="openRegisterDialog()">Register</button>
+        </h4>
+      </div>
+    </div>
+  </mat-card>
 </div>
+
