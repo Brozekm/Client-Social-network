@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {RegisterDialogComponent} from "./register-dialog/register-dialog.component";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TmpUsersService} from "../../core/services/tmp-users.service";
-import {AuthUserService} from "../../core/services/auth-user.service";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "../../core/_service/auth/authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -11,6 +11,7 @@ import {AuthUserService} from "../../core/services/auth-user.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  hidePassword: boolean = true;
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -18,9 +19,11 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(public dialog: MatDialog,
-              private authService: AuthUserService) { }
+              private authService: AuthenticationService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.logout();
   }
 
   openRegisterDialog(): void{
@@ -33,10 +36,13 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(value: any) {
-    this.authService.login(value.email, value.password).subscribe(value1 => {
-      console.log(value1);
-    }, error => {
-      console.error(error);
-    });
+    this.authService.login(value.email, value.password)
+      .subscribe(value => {
+        if (value){
+          this.router.navigate(['../'])
+        }
+      }, error => {
+        //TODO DISPLAY ERROR
+      })
   }
 }

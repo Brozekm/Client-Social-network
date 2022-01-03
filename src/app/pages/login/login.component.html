@@ -1,4 +1,4 @@
-<div class="in-middle" style="width: 30vw; min-width: 20rem">
+<div class="in-middle" style="height: 100vh">
   <mat-card>
     <div>
       <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" >
@@ -9,7 +9,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="yDa156.aF" formControlName="password">
+        <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="yDa156.aF" formControlName="password">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword? 'visibility_off': 'visibility'}}</mat-icon>
       </mat-form-field>
 
       <button mat-raised-button color="primary" class="w-100 mb-3" [disabled]="!loginForm.valid">

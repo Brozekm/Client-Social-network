@@ -15,13 +15,19 @@ import {MatCardModule} from "@angular/material/card";
 import { RegisterDialogComponent } from './pages/login/register-dialog/register-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./core/_guard/auth.guard";
+import {AuthenticationService} from "./core/_service/auth/authentication.service";
+import {UserService} from "./core/_service/protected/user.service";
+import {JwtInterceptor} from "./core/_helpers/jwt.interceptor";
+import { HomeComponent } from './pages/protected/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,16 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
