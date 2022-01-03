@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UserInterface} from "../dataTypes/user-interface";
+import {UserInterface} from "../_dataTypes/user-interface";
 
 
 @Injectable()

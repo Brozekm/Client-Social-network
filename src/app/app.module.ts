@@ -21,13 +21,20 @@ import {AuthenticationService} from "./core/_service/auth/authentication.service
 import {UserService} from "./core/_service/protected/user.service";
 import {JwtInterceptor} from "./core/_helpers/jwt.interceptor";
 import { HomeComponent } from './pages/protected/home/home.component';
+import { LayoutComponent } from './core/layout/layout.component';
+import { NavbarComponent } from './core/layout/navbar/navbar.component';
+import { FooterComponent } from './core/layout/footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterDialogComponent,
-    HomeComponent
+    HomeComponent,
+    LayoutComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ import { HomeComponent } from './pages/protected/home/home.component';
     MatCardModule,
     MatDialogModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     AuthGuard,
