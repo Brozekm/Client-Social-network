@@ -4,6 +4,7 @@ import {LoginComponent} from "./pages/login/login.component";
 import {HomeComponent} from "./pages/protected/home/home.component";
 import {AuthGuard} from "./core/_guard/auth.guard";
 import {LayoutComponent} from "./core/layout/layout.component";
+import {SettingsComponent} from "./pages/protected/settings/settings.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'settings', component: SettingsComponent}
     ]
   },
   {path: 'login', component: LoginComponent},

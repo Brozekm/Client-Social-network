@@ -25,6 +25,7 @@ import { LayoutComponent } from './core/layout/layout.component';
 import { NavbarComponent } from './core/layout/navbar/navbar.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SettingsComponent } from './pages/protected/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeComponent,
     LayoutComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

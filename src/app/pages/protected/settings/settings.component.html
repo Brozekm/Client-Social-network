@@ -1,0 +1,31 @@
+<div class="in-middle">
+  <mat-card class="side-card">
+    <button mat-raised-button color="primary">Change password</button>
+    <button routerLink="/login" mat-raised-button color="warn" class="logout-button">Logout</button>
+  </mat-card>
+
+  <mat-card class="main-card">
+    <h1>Profile</h1>
+    <hr>
+    <div class="flex justify-content-center">
+      <img class="m-4" src="assets/svg/avatar.svg" width="150px">
+    </div>
+    <div class="user-info">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [readonly]="true" [value]="user.email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput [value]="user.firstName" [readonly]="true">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Surname</mat-label>
+        <input matInput [readonly]="true" [value]="user.surname">
+      </mat-form-field>
+    </div>
+
+  </mat-card>
+</div>

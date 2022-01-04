@@ -1,0 +1,59 @@
+.in-middle{
+  height: 100vh;
+  display: flex;
+}
+
+.side-card{
+  display: flex;
+  margin: 1rem;
+}
+
+.side-card button{
+  margin: 0.25rem;
+}
+
+.user-info{
+  display: flex;
+}
+
+
+@media only screen and (max-width: 600px){
+  .in-middle{
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  }
+  .main-card{
+    width: 90%;
+  }
+
+  .side-card{
+    flex-direction: row;
+  }
+
+  .user-info{
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .in-middle{
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .main-card{
+    width: 700px;
+  }
+
+  .side-card{
+    flex-direction: column;
+  }
+
+  .user-info{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+}

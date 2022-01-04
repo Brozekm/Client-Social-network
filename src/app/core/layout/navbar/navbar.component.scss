@@ -5,6 +5,8 @@ $primary-color: #ffc107;
   position: fixed;
   background: #424242;
   transition: width $transition-speed ease;
+  font-family: "Helvetica Neue", serif;
+  letter-spacing: 0.2ch;
 }
 
 .custom-navbar-nav {
@@ -54,6 +56,7 @@ $primary-color: #ffc107;
 }
 
 .logo {
+  font-family: Arial, serif;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 1rem;
