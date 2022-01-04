@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserInterface} from "../../../core/_dataTypes/user-interface";
 
 @Component({
@@ -14,11 +14,14 @@ export class SettingsComponent implements OnInit {
     surname: ''
   };
 
-  constructor() { }
+  seeProfile: boolean = true;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     let userRaw = localStorage.getItem('user');
-    if (userRaw){
+    if (userRaw) {
       this.user = JSON.parse(userRaw);
     }
   }

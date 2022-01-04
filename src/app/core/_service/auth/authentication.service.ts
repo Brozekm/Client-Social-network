@@ -33,6 +33,20 @@ export class AuthenticationService {
     });
   }
 
+  public register(email: string, password: string, firstName:string, surname:string): Observable<boolean> {
+    return new Observable(subscriber => {
+      this.http.post(this.URL + '/register', {email: email, password: password, firstName: firstName, surname: surname})
+        .subscribe(value => {
+          console.log(value);
+          subscriber.next(true);
+          subscriber.complete();
+        }, error => {
+          console.log(error);
+          subscriber.error(error);
+        })
+    });
+  }
+
   public logout() {
     localStorage.removeItem('user');
   }

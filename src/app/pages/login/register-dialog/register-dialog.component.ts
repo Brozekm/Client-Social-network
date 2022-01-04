@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AuthenticationService} from "../../../core/_service/auth/authentication.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register-dialog',
@@ -21,14 +23,23 @@ export class RegisterDialogComponent implements OnInit {
     surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
   });
 
-  constructor(public dialogRef: MatDialogRef<RegisterDialogComponent>) {
+  constructor(public dialogRef: MatDialogRef<RegisterDialogComponent>,
+              private authService: AuthenticationService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
   }
 
   registerUser(value: any) {
-    console.log(value);
+    this.authService.register(value.email, value.password, value.name, value.surname).subscribe(() => {
+        console.log("User creation was successful");
+        this._snackBar.open("Account created", "OK", {duration: 3000});
+        this.dialogRef.close();
+      }, error => {
+        console.log("Display error email error");
+      }
+    )
   }
 
   private checkPassword(): ValidatorFn {
