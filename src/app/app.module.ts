@@ -27,6 +27,8 @@ import { FooterComponent } from './core/layout/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SettingsComponent } from './pages/protected/settings/settings.component';
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import { FriendsComponent } from './pages/protected/friends/friends.component';
+import { SearchComponent } from './core/layout/search/search.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     LayoutComponent,
     NavbarComponent,
     FooterComponent,
-    SettingsComponent
+    SettingsComponent,
+    FriendsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

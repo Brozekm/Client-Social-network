@@ -7,6 +7,7 @@ $primary-color: #ffc107;
   transition: width $transition-speed ease;
   font-family: "Helvetica Neue", serif;
   letter-spacing: 0.2ch;
+  z-index: 10;
 }
 
 .custom-navbar-nav {

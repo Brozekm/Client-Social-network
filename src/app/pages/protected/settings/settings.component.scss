@@ -1,5 +1,5 @@
 .in-middle{
-  height: 100vh;
+  //height: 100vh;
   display: flex;
 }
 
@@ -39,7 +39,7 @@
 @media only screen and (min-width: 600px) {
   .in-middle{
     justify-content: center;
-    align-items: center;
+    //align-items: center;
     align-content: center;
   }
 
@@ -49,6 +49,10 @@
 
   .side-card{
     flex-direction: column;
+    justify-content: space-between;
+  }
+  .btn, .logout-button{
+    height: 100%;
   }
 
   .user-info{
