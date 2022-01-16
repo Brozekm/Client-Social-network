@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserInterface} from "../../_dataTypes/user-interface";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -33,7 +34,7 @@ export class AuthenticationService {
     });
   }
 
-  public register(email: string, password: string, firstName:string, surname:string): Observable<boolean> {
+  public register(email: string, password: string, firstName: string, surname: string): Observable<boolean> {
     return new Observable(subscriber => {
       this.http.post(this.URL + '/register', {email: email, password: password, firstName: firstName, surname: surname})
         .subscribe(value => {
@@ -49,5 +50,10 @@ export class AuthenticationService {
 
   public logout() {
     localStorage.removeItem('user');
+  }
+
+  public logoutAndReload(){
+    this.logout();
+    window.location.reload();
   }
 }

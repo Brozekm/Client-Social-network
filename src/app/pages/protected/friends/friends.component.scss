@@ -1,11 +1,6 @@
 .in-middle{
-  //height: 100vh;
   display: flex;
 }
-
-
-
-
 
 
 @media only screen and (max-width: 600px){
@@ -21,27 +16,17 @@
   .main-card{
     width: 100%;
   }
-
-
-
 }
 
 @media only screen and (min-width: 600px) {
   .in-middle{
     justify-content: center;
-    //align-items: center;
     align-content: center;
   }
 
   .main-card{
-    width: 700px;
+    min-width: 800px;
     min-height: 400px;
   }
-
-
-  .btn, .logout-button{
-    height: 100%;
-  }
-
 
 }

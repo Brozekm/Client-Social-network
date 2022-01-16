@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
         console.log('Wall');
         break;
       case ('/friendsManagement'):
-        this.changeHeader('Friends');
+        this.changeHeader('Friends management');
         console.log('Friends');
         break;
       case ('/settings'):
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
         console.log('Settings');
         break;
       case ('/messenger'):
-        this.changeHeader('Messages');
+        this.changeHeader('Messenger');
         console.log('Messages')
         break;
       default:

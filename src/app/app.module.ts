@@ -30,6 +30,9 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import { FriendsComponent } from './pages/protected/friends/friends.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { HeaderComponent } from './core/layout/header/header.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { SearchFriendComponent } from './pages/protected/friends/search-friend/search-friend.component';
 
 @NgModule({
   declarations: [
@@ -42,26 +45,29 @@ import { HeaderComponent } from './core/layout/header/header.component';
     FooterComponent,
     SettingsComponent,
     FriendsComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchFriendComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatDividerModule,
-        MatButtonModule,
-        MatGridListModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCardModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FontAwesomeModule,
-        MatSnackBarModule,
-        MatTabsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
+  ],
   providers: [
     AuthGuard,
     AuthenticationService,

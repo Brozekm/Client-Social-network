@@ -4,6 +4,7 @@ import {RegisterDialogComponent} from "./register-dialog/register-dialog.compone
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../core/_service/auth/authentication.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private authService: AuthenticationService,
-              private router: Router) { }
+              private router: Router,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.authService.logout();
@@ -42,7 +44,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['../'])
         }
       }, error => {
-        //TODO DISPLAY ERROR
+        if (error.status == 500){
+          this.snackbar.open('Server is not working', '', {duration: 2000});
+        }else{
+          this.snackbar.open('Wrong credentials', '', {duration: 2000}) ;
+        }
       })
   }
 }
