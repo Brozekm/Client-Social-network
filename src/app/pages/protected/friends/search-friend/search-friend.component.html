@@ -1,0 +1,56 @@
+<div class="flex-col">
+  <div class="flex justify-content-center">
+    <form [formGroup]="searchForm" class="my-form" (keyup.enter)="ngSubmit()">
+      <mat-form-field appearance="legacy" class="w-100">
+        <mat-label class="text-center">
+          Find friends
+        </mat-label>
+        <fa-icon [icon]="faSearch" size="lg" matPrefix class="mr-3"
+                 [ngClass]="searchForm.valid ? 'icon-enable' : 'icon-disable'"></fa-icon>
+        <button type="submit">
+        </button>
+        <input type="text" matInput placeholder="Username" formControlName="username">
+        <button *ngIf="searchForm.controls.username.value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="searchForm.controls.username.setValue(''); loaded$.next(false)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div *ngIf="loaded$.getValue() && dataSource.data.length == 0">
+        <p>
+          There are no users with name like <span
+          class="text-amber username">{{searchForm.controls.username.value}}</span>
+        </p>
+      </div>
+      <div *ngIf="loaded$.getValue()" class="mat-elevation-z4">
+
+        <div *ngIf="dataSource.data.length != 0">
+          <table mat-table [dataSource]="dataSource" class="w-100">
+            <ng-container matColumnDef="user">
+              <th mat-header-cell *matHeaderCellDef> Users</th>
+              <td mat-cell *matCellDef="let element">
+                <span class="username">{{element.username}}</span>
+                <br>
+                <span style="opacity: 0.7">{{element.email}}</span></td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="addFriend(element)">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [hidePageSize]="true" [pageSizeOptions]="[5]"
+                         showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

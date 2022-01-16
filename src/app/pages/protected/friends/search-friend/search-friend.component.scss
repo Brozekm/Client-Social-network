@@ -1,0 +1,34 @@
+.username {
+  font-size: 14px;
+  letter-spacing: 0.2ch;
+  font-weight: 500;
+}
+
+
+mat-form-field {
+  font-size: 18px;
+}
+
+.icon-disable {
+  opacity: 0.5;
+}
+
+.icon-enable {
+  opacity: 1;
+}
+
+.mat-column-action {
+  width: 30px;
+}
+
+@media only screen and (min-width: 600px) {
+  .my-form {
+    width: 60%;
+  }
+}
+
+@media only screen and(max-width: 600px) {
+  .my-form {
+    width: 90%;
+  }
+}
