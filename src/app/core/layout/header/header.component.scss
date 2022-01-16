@@ -1,0 +1,26 @@
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: "Helvetica Neue", serif;
+  letter-spacing: 0.2ch;
+  //border-radius: 1rem;
+  //background: #424242;
+}
+
+@media only screen and(min-width: 600px){
+  .center{
+    margin-bottom: 5rem;
+  }
+}
+
+@media only screen and(max-width: 600px){
+  .center{
+    margin-bottom: 2rem;
+  }
+}
+
