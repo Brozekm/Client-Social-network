@@ -8,6 +8,10 @@ import {SearchedUserInterface} from "../../../core/_dataTypes/searchedUser-inter
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
+  showNewRequests:boolean = false;
+  showFriendList:boolean = false;
+  showBlockedUsers:boolean = false;
+
 
   constructor() {
   }
@@ -15,4 +19,25 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  tabChange($event: number) {
+    switch ($event) {
+      case 0:
+        break;
+      case 1:
+        this.showFriendList = true;
+        this.showNewRequests = false;
+        this.showBlockedUsers = false;
+        break;
+      case 2:
+        this.showFriendList = false;
+        this.showNewRequests = true;
+        this.showBlockedUsers = false;
+        break;
+      case 3:
+        this.showFriendList = false;
+        this.showNewRequests = false;
+        this.showBlockedUsers = true;
+        break;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <div class="in-middle">
   <div class="flex flex-col items-center w-100">
-    <mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab-group dynamicHeight mat-align-tabs="center" (selectedIndexChange)="tabChange($event)">
 
 
       <mat-tab label="Search">
@@ -12,14 +12,16 @@
 
       <mat-tab label="Friends">
         <mat-card class="main-card">
-          blocked
+          Friendlist
         </mat-card>
       </mat-tab>
 
 
       <mat-tab label="New Requests">
         <mat-card class="main-card">
-          Table of new requests
+          <div *ngIf="showNewRequests">
+            <app-new-requests></app-new-requests>
+          </div>
         </mat-card>
       </mat-tab>
 

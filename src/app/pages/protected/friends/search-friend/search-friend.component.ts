@@ -20,7 +20,9 @@ export class SearchFriendComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['user', 'action'];
-  dataSource = new MatTableDataSource<SearchedUserInterface>()
+  dataSource = new MatTableDataSource<SearchedUserInterface>();
+
+  data: SearchedUserInterface[] = [];
 
   loaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -46,12 +48,19 @@ export class SearchFriendComponent implements OnInit, AfterViewInit {
     }
 
     this.friendshipService.getUsersLike(user).subscribe(value => {
-      this.dataSource.data = value;
+      this.data = value;
+      this.dataSource.data = this.data;
       this.loaded$.next(true);
     });
   }
 
   addFriend(element: SearchedUserInterface) {
-
+    this.friendshipService.sendFriendshipRequest(element.email).then(() => {
+      const index = this.data.indexOf(element, 0);
+      if (index > -1){
+        this.data.splice(index, 1);
+      }
+      this.dataSource.data = this.data;
+    })
   }
 }

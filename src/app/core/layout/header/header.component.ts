@@ -26,19 +26,15 @@ export class HeaderComponent implements OnInit {
     switch (url) {
       case ('/'):
         this.changeHeader('Wall');
-        console.log('Wall');
         break;
       case ('/friendsManagement'):
-        this.changeHeader('Friends management');
-        console.log('Friends');
+        this.changeHeader('Friendship management');
         break;
       case ('/settings'):
         this.changeHeader('Settings');
-        console.log('Settings');
         break;
       case ('/messenger'):
         this.changeHeader('Messenger');
-        console.log('Messages')
         break;
       default:
         this.changeHeader('Unknown');

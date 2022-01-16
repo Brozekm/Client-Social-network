@@ -33,6 +33,7 @@ import { HeaderComponent } from './core/layout/header/header.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SearchFriendComponent } from './pages/protected/friends/search-friend/search-friend.component';
+import { NewRequestsComponent } from './pages/protected/friends/new-requests/new-requests.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SearchFriendComponent } from './pages/protected/friends/search-friend/s
     SettingsComponent,
     FriendsComponent,
     HeaderComponent,
-    SearchFriendComponent
+    SearchFriendComponent,
+    NewRequestsComponent
   ],
   imports: [
     BrowserModule,
