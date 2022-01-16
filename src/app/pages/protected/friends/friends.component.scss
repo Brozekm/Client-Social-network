@@ -1,6 +1,47 @@
 .in-middle{
-  height: 100vh;
+  //height: 100vh;
   display: flex;
-  justify-content: center;
-  align-content: center;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 600px){
+  .in-middle{
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  }
+  .mat-tab-group{
+    width: 90%;
+  }
+
+  .main-card{
+    width: 100%;
+  }
+
+
+
+}
+
+@media only screen and (min-width: 600px) {
+  .in-middle{
+    justify-content: center;
+    //align-items: center;
+    align-content: center;
+  }
+
+  .main-card{
+    width: 700px;
+    min-height: 400px;
+  }
+
+
+  .btn, .logout-button{
+    height: 100%;
+  }
+
+
 }

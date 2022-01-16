@@ -1,3 +1,40 @@
 <div class="in-middle">
-  <p>friends works!</p>
+  <div class="flex flex-col align-items-center w-100">
+      <mat-tab-group dynamicHeight mat-align-tabs="center" >
+
+
+        <mat-tab label="Search">
+          <mat-card class="main-card">
+            <mat-form-field class="my-form" appearance="legacy">
+              <mat-label class="text-center">
+                Find friends
+              </mat-label>
+              <fa-icon [icon]="faSearch" size="lg" matPrefix style="margin-right: 1rem"></fa-icon>
+              <input type="text" matInput placeholder="Karel">
+            </mat-form-field>
+          </mat-card>
+        </mat-tab>
+
+
+        <mat-tab label="Friends">
+          <mat-card class="main-card">
+            blocked
+          </mat-card>
+        </mat-tab>
+
+
+        <mat-tab label="New Requests">
+          <mat-card class="main-card">
+            Table of new requests
+          </mat-card>
+        </mat-tab>
+
+
+        <mat-tab label="Blocked Users">
+          <mat-card class="main-card">
+            blocked
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+  </div>
 </div>

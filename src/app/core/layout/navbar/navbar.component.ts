@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faCog, faHome, faUsers, faEnvelopeOpen, faEnvelope, faArrowRight, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faUsers, faEnvelopeOpen, faEnvelope, faArrowRight, faArrowLeft, faCog} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-navbar',

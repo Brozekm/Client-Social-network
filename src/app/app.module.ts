@@ -28,7 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SettingsComponent } from './pages/protected/settings/settings.component';
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import { FriendsComponent } from './pages/protected/friends/friends.component';
-import { SearchComponent } from './core/layout/search/search.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { HeaderComponent } from './core/layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -41,25 +42,26 @@ import { SearchComponent } from './core/layout/search/search.component';
     FooterComponent,
     SettingsComponent,
     FriendsComponent,
-    SearchComponent
+    HeaderComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+        MatSnackBarModule,
+        MatTabsModule
+    ],
   providers: [
     AuthGuard,
     AuthenticationService,

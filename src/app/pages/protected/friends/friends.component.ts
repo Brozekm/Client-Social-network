@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-friends',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
+  faSearch = faSearch;
 
   constructor() { }
 
