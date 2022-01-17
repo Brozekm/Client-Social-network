@@ -1,0 +1,21 @@
+.username {
+  font-size: 14px;
+  letter-spacing: 0.2ch;
+  font-weight: 500;
+}
+
+.mat-column-action {
+  width: 60px;
+}
+
+@media only screen and (min-width: 600px) {
+  .my-table {
+    width: 60%;
+  }
+}
+
+@media only screen and(max-width: 600px) {
+  .my-table {
+    width: 90%;
+  }
+}
