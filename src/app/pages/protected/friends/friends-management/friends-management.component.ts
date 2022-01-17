@@ -7,14 +7,14 @@ import {FriendshipsService} from "../../../../core/_service/protected/friendship
 import {EmailUsernameInterface} from "../../../../core/_dataTypes/emailUsername-interface";
 import {faTrashAlt, faCheck, faBan, faUnlock} from "@fortawesome/free-solid-svg-icons";
 import {FriendsManagement} from "../friends.component";
-import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-friends-managment',
-  templateUrl: './friends-managment.component.html',
-  styleUrls: ['./friends-managment.component.scss']
+  selector: 'app-friends-management',
+  templateUrl: './friends-management.component.html',
+  styleUrls: ['./friends-management.component.scss']
 })
-export class FriendsManagmentComponent implements OnInit, AfterViewInit {
+export class FriendsManagementComponent implements OnInit, AfterViewInit {
   @Input() show: string = '';
 
   faTrashAlt = faTrashAlt;
@@ -31,7 +31,8 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
 
   loaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private friendshipService: FriendshipsService) {
+  constructor(private friendshipService: FriendshipsService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -41,10 +42,6 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
       case (FriendsManagement.FRIENDLIST):
         this.friendshipService.getFriends().then(value => {
           this.setData(value);
-        }, reason => {
-          if (reason instanceof HttpErrorResponse && reason.status === 400){
-
-          }
         });
         break;
       case (FriendsManagement.NEW_REQUESTS):
@@ -74,9 +71,6 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
   acceptFriendship(element: EmailUsernameInterface) {
     this.friendshipService.acceptFriendship(element.email).then(() => {
       this.deleteElementAndReloadData(element);
-    }, reason => {
-      //TODO add error handling
-      console.log(reason);
     });
   }
 
@@ -97,18 +91,12 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
   blockUser(element: EmailUsernameInterface) {
     this.friendshipService.blockUser(element.email).then(() => {
       this.deleteElementAndReloadData(element);
-    }, reason => {
-      //TODO add error handling
-      console.log(reason);
     });
   }
 
   unblockUser(element: EmailUsernameInterface) {
     this.friendshipService.unblockUser(element.email).then(() => {
       this.deleteElementAndReloadData(element);
-    }, reason => {
-      //TODO add error handling
-      console.log(reason);
     });
   }
 }

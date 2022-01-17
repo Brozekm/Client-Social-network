@@ -10,13 +10,15 @@ import {UserInterface} from "../_dataTypes/user-interface";
 import {tap} from "rxjs/operators";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../_service/auth/authentication.service";
 
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
   constructor(private _snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private auth: AuthenticationService) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -43,13 +45,19 @@ export class JwtInterceptor implements HttpInterceptor {
             switch (e.status){
               case (0):
               case (HttpError.InternalServerError):
-                this._snackBar.open('Server is down, try again later', 'OK');
+                this._snackBar.open('Server is down! Try again later', 'OK');
                 this.router.navigate(['/login']);
                 break
               case (HttpError.Unauthorized):
-                this._snackBar.open('Server is down, try again later', 'OK');
+                this._snackBar.open('Server is down! Try again later', 'OK');
                 this.router.navigate(['/login']);
                 break;
+              case (HttpError.BadRequest):
+                // login and register has its own error handling
+                if (e.url != (this.auth.URL + '/login') || e.url != (this.auth.URL + '/register')){
+                  this._snackBar.open('Bad request! Try again later', 'OK');
+                }
+                break
             }
           }else{
             return e;

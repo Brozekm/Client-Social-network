@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewRequestsComponent } from './new-requests.component';
+import { FriendsManagementComponent } from './friends-management.component';
 
-describe('NewRequestsComponent', () => {
-  let component: NewRequestsComponent;
-  let fixture: ComponentFixture<NewRequestsComponent>;
+describe('FriendsManagmentComponent', () => {
+  let component: FriendsManagementComponent;
+  let fixture: ComponentFixture<FriendsManagementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewRequestsComponent ]
+      declarations: [ FriendsManagementComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewRequestsComponent);
+    fixture = TestBed.createComponent(FriendsManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

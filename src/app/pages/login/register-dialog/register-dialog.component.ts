@@ -19,8 +19,7 @@ export class RegisterDialogComponent implements OnInit {
       Validators.maxLength(20),
       Validators.minLength(7),
       this.checkPassword()]),
-    username: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-    // surname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    username: new FormControl('', [Validators.required, Validators.maxLength(20)])
   });
 
   constructor(public dialogRef: MatDialogRef<RegisterDialogComponent>,
@@ -33,11 +32,11 @@ export class RegisterDialogComponent implements OnInit {
 
   registerUser(value: any) {
     this.authService.register(value.email, value.password, value.username).subscribe(() => {
-        console.log("User creation was successful");
         this._snackBar.open("Account created", "OK", {duration: 3000});
         this.dialogRef.close();
       }, error => {
-        console.log("Display error email error");
+      this._snackBar.open("Registration failed", "OK");
+      this.dialogRef.close();
       }
     )
   }
