@@ -7,6 +7,7 @@ import {FriendshipsService} from "../../../../core/_service/protected/friendship
 import {EmailUsernameInterface} from "../../../../core/_dataTypes/emailUsername-interface";
 import {faTrashAlt, faCheck, faBan, faUnlock} from "@fortawesome/free-solid-svg-icons";
 import {FriendsManagement} from "../friends.component";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-friends-managment',
@@ -40,6 +41,10 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
       case (FriendsManagement.FRIENDLIST):
         this.friendshipService.getFriends().then(value => {
           this.setData(value);
+        }, reason => {
+          if (reason instanceof HttpErrorResponse && reason.status === 400){
+
+          }
         });
         break;
       case (FriendsManagement.NEW_REQUESTS):
@@ -99,6 +104,11 @@ export class FriendsManagmentComponent implements OnInit, AfterViewInit {
   }
 
   unblockUser(element: EmailUsernameInterface) {
-
+    this.friendshipService.unblockUser(element.email).then(() => {
+      this.deleteElementAndReloadData(element);
+    }, reason => {
+      //TODO add error handling
+      console.log(reason);
+    });
   }
 }

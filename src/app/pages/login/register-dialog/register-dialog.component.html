@@ -7,6 +7,14 @@
         <input matInput placeholder="user@gmail.com" formControlName="email">
       </mat-form-field>
     </div>
+
+    <div class="w-100">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="John" formControlName="username">
+      </mat-form-field>
+    </div>
+
     <div class="w-100">
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
@@ -16,21 +24,22 @@
       </mat-form-field>
     </div>
 
-    <div class="flex justify-content-between">
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="John" formControlName="name">
-        </mat-form-field>
-      </div>
 
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Surname</mat-label>
-          <input matInput placeholder="Jonson" formControlName="surname">
-        </mat-form-field>
-      </div>
-    </div>
+<!--    <div class="flex justify-content-between">-->
+<!--      <div>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Name</mat-label>-->
+<!--          <input matInput placeholder="John" formControlName="name">-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+
+<!--      <div>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Surname</mat-label>-->
+<!--          <input matInput placeholder="Jonson" formControlName="surname">-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="flex justify-content-between">
 
       <button mat-raised-button color="primary" [disabled]="!registerForm.valid"

@@ -34,9 +34,9 @@ export class AuthenticationService {
     });
   }
 
-  public register(email: string, password: string, firstName: string, surname: string): Observable<boolean> {
+  public register(email: string, password: string, username: string): Observable<boolean> {
     return new Observable(subscriber => {
-      this.http.post(this.URL + '/register', {email: email, password: password, firstName: firstName, surname: surname})
+      this.http.post(this.URL + '/register', {email: email, password: password, userName: username})
         .subscribe(value => {
           console.log(value);
           subscriber.next(true);
@@ -50,10 +50,5 @@ export class AuthenticationService {
 
   public logout() {
     localStorage.removeItem('user');
-  }
-
-  public logoutAndReload(){
-    this.logout();
-    window.location.reload();
   }
 }

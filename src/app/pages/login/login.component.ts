@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../core/_service/auth/authentication.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.maxLength(20)])
   });
 
+
   constructor(public dialog: MatDialog,
               private authService: AuthenticationService,
-              private router: Router,
-              private snackbar: MatSnackBar) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.authService.logout();
@@ -44,10 +45,12 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['../'])
         }
       }, error => {
-        if (error.status == 500){
-          this.snackbar.open('Server is not working', '', {duration: 2000});
-        }else{
-          this.snackbar.open('Wrong credentials', '', {duration: 2000}) ;
+        if (error instanceof HttpErrorResponse && error.status === 400){
+          this.loginForm.controls['email'].setErrors({'incorrect': true});
+          this.loginForm.controls['password'].setErrors({'incorrect': true});
+        }else {
+          this.loginForm.controls['email'].setErrors({'incorrect': false});
+          this.loginForm.controls['password'].setErrors({'incorrect': false});
         }
       })
   }

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SearchedUserInterface} from "../../_dataTypes/searchedUser-interface";
-import {AuthenticationService} from "../auth/authentication.service";
 import {EmailUsernameInterface} from "../../_dataTypes/emailUsername-interface";
 
 @Injectable({
@@ -12,8 +11,7 @@ export class FriendshipsService {
 
   readonly URL = 'http://localhost:8080';
 
-  constructor(private http: HttpClient,
-              private auth: AuthenticationService) {
+  constructor(private http: HttpClient) {
   }
 
   public getUsersLike(username: string): Observable<SearchedUserInterface[]> {
@@ -26,8 +24,7 @@ export class FriendshipsService {
           subscriber.next(users);
           subscriber.complete();
         }, error => {
-          console.log(error.status);
-          this.auth.logoutAndReload();
+          subscriber.error(error);
         })
     })
   }
@@ -68,9 +65,6 @@ export class FriendshipsService {
       this.http.post(this.URL + '/sendFriendshipRequest', {email: email}).subscribe(value => {
         resolve(true);
       }, error => {
-        if (error.status === 401 || error.status >= 500) {
-          this.auth.logoutAndReload();
-        }
         reject(error);
       })
     }));
@@ -94,9 +88,7 @@ export class FriendshipsService {
         this.http.put(this.URL + '/acceptFriendship', {email: targetEmail}).subscribe(() => {
           resolve(true);
         }, error => {
-          if (error.status != 500 || error.status != 401){
-            reject(error);
-          }
+          reject(error);
         })
     });
   }
@@ -106,9 +98,17 @@ export class FriendshipsService {
       this.http.put(this.URL + '/blockUser', {email: targetEmail}).subscribe(() => {
         resolve(true);
       }, error => {
-        if (error.status != 500 || error.status != 401){
-          reject(error);
-        }
+        reject(error);
+      })
+    });
+  }
+
+  public unblockUser(targetEmail: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.http.put(this.URL + '/unblockUser', {email: targetEmail}).subscribe(() => {
+        resolve(true);
+      }, error => {
+        reject(error);
       })
     });
   }

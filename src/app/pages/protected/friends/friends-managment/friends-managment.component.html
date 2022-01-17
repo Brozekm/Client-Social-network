@@ -24,7 +24,7 @@
                 <button *ngIf="show === 'Requests' || show === 'Friends'" mat-raised-button color="warn" (click)="rejectFriendship(element)">
                   <fa-icon [icon]="faTrashAlt"></fa-icon>
                 </button>
-                <button *ngIf="show === 'Blocked'" mat-raised-button color="warn" (click)="unblockUser(element)">
+                <button *ngIf="show === 'Blocked'" mat-raised-button color="primary" (click)="unblockUser(element)">
                   <fa-icon [icon]="faUnlock"></fa-icon>
                 </button>
               </div>
