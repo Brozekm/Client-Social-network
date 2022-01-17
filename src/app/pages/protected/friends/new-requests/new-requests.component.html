@@ -18,6 +18,9 @@
                 <button mat-raised-button color="primary" style="margin-right: 0.5rem" (click)="acceptFriendship(element)">
                   <fa-icon [icon]="faCheck"></fa-icon>
                 </button>
+                <button mat-raised-button color="warn" style="margin-right: 0.5rem" (click)="blockUser(element)">
+                  <fa-icon [icon]="faStopCircle"></fa-icon>
+                </button>
                 <button mat-raised-button color="warn" (click)="rejectFriendship(element)">
                   <fa-icon [icon]="faTrashAlt"></fa-icon>
                 </button>

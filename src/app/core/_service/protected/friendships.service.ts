@@ -33,6 +33,36 @@ export class FriendshipsService {
   }
 
 
+  public getFriendRequests(): Promise<EmailUsernameInterface[]> {
+    return new Promise<EmailUsernameInterface[]>((resolve, reject) => {
+      this.http.get(this.URL + '/getFriendshipRequests').subscribe(value => {
+        let requests: EmailUsernameInterface[] = value as EmailUsernameInterface[];
+        resolve(requests);
+      }, error => reject(error));
+    });
+  }
+
+
+  public getFriends(): Promise<EmailUsernameInterface[]> {
+    return new Promise<EmailUsernameInterface[]>((resolve, reject) => {
+      this.http.get(this.URL + '/getFriends').subscribe(value => {
+        let requests: EmailUsernameInterface[] = value as EmailUsernameInterface[];
+        resolve(requests);
+      }, error => reject(error));
+    });
+  }
+
+
+  public getBlockedUsers(): Promise<EmailUsernameInterface[]> {
+    return new Promise<EmailUsernameInterface[]>((resolve, reject) => {
+      this.http.get(this.URL + '/getBlockedUsers').subscribe(value => {
+        let requests: EmailUsernameInterface[] = value as EmailUsernameInterface[];
+        resolve(requests);
+      }, error => reject(error));
+    });
+  }
+
+
   public sendFriendshipRequest(email: string): Promise<boolean> {
     return new Promise(((resolve, reject) => {
       this.http.post(this.URL + '/sendFriendshipRequest', {email: email}).subscribe(value => {
@@ -46,16 +76,8 @@ export class FriendshipsService {
     }));
   }
 
-  public getFriendRequests(): Promise<EmailUsernameInterface[]> {
-    return new Promise<EmailUsernameInterface[]>((resolve, reject) => {
-      this.http.get(this.URL + '/getFriendshipRequests').subscribe(value => {
-        let requests: EmailUsernameInterface[] = value as EmailUsernameInterface[];
-        resolve(requests);
-      }, error => reject(error));
-    });
-  }
 
-  public deleteFriendship(targetEmail: string): Promise<boolean>{
+  public deleteFriendship(targetEmail: string): Promise<boolean> {
     let params = new HttpParams()
       .set('email', targetEmail);
     return new Promise<boolean>((resolve, reject) => {
@@ -63,6 +85,30 @@ export class FriendshipsService {
         resolve(true);
       }, error => {
         reject(error);
+      })
+    });
+  }
+
+  public acceptFriendship(targetEmail: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+        this.http.put(this.URL + '/acceptFriendship', {email: targetEmail}).subscribe(() => {
+          resolve(true);
+        }, error => {
+          if (error.status != 500 || error.status != 401){
+            reject(error);
+          }
+        })
+    });
+  }
+
+  public blockUser(targetEmail: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.http.put(this.URL + '/blockUser', {email: targetEmail}).subscribe(() => {
+        resolve(true);
+      }, error => {
+        if (error.status != 500 || error.status != 401){
+          reject(error);
+        }
       })
     });
   }

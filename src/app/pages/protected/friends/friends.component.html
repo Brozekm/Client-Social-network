@@ -12,15 +12,17 @@
 
       <mat-tab label="Friends">
         <mat-card class="main-card">
-          Friendlist
+          <div *ngIf="show === 'Friends'">
+            <app-friends-managment [show]="show"></app-friends-managment>
+          </div>
         </mat-card>
       </mat-tab>
 
 
       <mat-tab label="New Requests">
         <mat-card class="main-card">
-          <div *ngIf="showNewRequests">
-            <app-new-requests></app-new-requests>
+          <div *ngIf="show === 'Requests'">
+            <app-friends-managment [show]="show"></app-friends-managment>
           </div>
         </mat-card>
       </mat-tab>
@@ -28,7 +30,9 @@
 
       <mat-tab label="Blocked Users">
         <mat-card class="main-card">
-          blocked
+          <div *ngIf="show === 'Blocked'">
+            <app-friends-managment [show]="show"></app-friends-managment>
+          </div>
         </mat-card>
       </mat-tab>
     </mat-tab-group>

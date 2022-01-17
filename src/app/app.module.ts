@@ -34,6 +34,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SearchFriendComponent } from './pages/protected/friends/search-friend/search-friend.component';
 import { NewRequestsComponent } from './pages/protected/friends/new-requests/new-requests.component';
+import { FriendsManagmentComponent } from './pages/protected/friends/friends-managment/friends-managment.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { NewRequestsComponent } from './pages/protected/friends/new-requests/new
     FriendsComponent,
     HeaderComponent,
     SearchFriendComponent,
-    NewRequestsComponent
+    NewRequestsComponent,
+    FriendsManagmentComponent
   ],
   imports: [
     BrowserModule,
