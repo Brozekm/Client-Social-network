@@ -16,7 +16,6 @@ export class RegisterDialogComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.maxLength(20),
       Validators.minLength(7),
       this.checkPassword()]),
     username: new FormControl('', [Validators.required, Validators.maxLength(20)])
