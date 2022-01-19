@@ -37,7 +37,7 @@
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef> Action</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="primary" (click)="addFriend(element)">
+                <button mat-raised-button color="primary" (click)="addFriend(element)" [disabled]="element.status != null">
                   <fa-icon [icon]="faPlus"></fa-icon>
                 </button>
               </td>

@@ -48,6 +48,7 @@ export class SearchFriendComponent implements OnInit, AfterViewInit {
     }
 
     this.friendshipService.getUsersLike(user).subscribe(value => {
+      console.log(value);
       this.data = value;
       this.dataSource.data = this.data;
       this.loaded$.next(true);
@@ -57,9 +58,7 @@ export class SearchFriendComponent implements OnInit, AfterViewInit {
   addFriend(element: SearchedUserInterface) {
     this.friendshipService.sendFriendshipRequest(element.email).then(() => {
       const index = this.data.indexOf(element, 0);
-      if (index > -1){
-        this.data.splice(index, 1);
-      }
+      this.data[index].status = 'NEW';
       this.dataSource.data = this.data;
     })
   }

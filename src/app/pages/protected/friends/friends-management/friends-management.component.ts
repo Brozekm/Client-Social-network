@@ -25,9 +25,9 @@ export class FriendsManagementComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['user', 'action'];
-  dataSource = new MatTableDataSource<SearchedUserInterface>();
+  dataSource = new MatTableDataSource<EmailUsernameInterface>();
 
-  data: SearchedUserInterface[] = [];
+  data: EmailUsernameInterface[] = [];
 
   loaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -58,7 +58,7 @@ export class FriendsManagementComponent implements OnInit, AfterViewInit {
 
   }
 
-  setData(value: SearchedUserInterface[]) {
+  setData(value: EmailUsernameInterface[]) {
     this.data = value;
     this.dataSource.data = this.data;
     this.loaded$.next(true);
