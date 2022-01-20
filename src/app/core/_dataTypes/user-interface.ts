@@ -1,6 +1,11 @@
+export enum EnumRole {
+  ADMIN = "ADMIN",
+  USER = "USER"
+}
+
 export interface UserInterface {
   email: string,
-  firstName: string,
-  surname: string,
-  token: string
+  userName: string,
+  jwttoken: string,
+  role?: EnumRole;
 }

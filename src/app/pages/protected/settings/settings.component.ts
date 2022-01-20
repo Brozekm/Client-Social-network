@@ -8,10 +8,9 @@ import {UserInterface} from "../../../core/_dataTypes/user-interface";
 })
 export class SettingsComponent implements OnInit {
   user: UserInterface = {
-    token: '',
+    jwttoken: '',
     email: '',
-    firstName: '',
-    surname: ''
+    userName: ''
   };
 
   seeProfile: boolean = true;

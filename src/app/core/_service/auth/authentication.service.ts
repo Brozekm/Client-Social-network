@@ -19,7 +19,9 @@ export class AuthenticationService {
     return new Observable(subscriber => {
       this.http.post(this.URL + '/login', {email: email, password: password})
         .subscribe(value => {
+          console.log(value);
           let user: UserInterface = value as UserInterface;
+          console.log(user);
           if (user) {
             localStorage.setItem('user', JSON.stringify(user));
             subscriber.next(true);
