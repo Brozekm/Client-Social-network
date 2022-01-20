@@ -36,6 +36,7 @@ import {SearchFriendComponent} from './pages/protected/friends/search-friend/sea
 import {FriendsManagementComponent} from './pages/protected/friends/friends-management/friends-management.component';
 import {CreatePostDialogComponent} from './pages/protected/home/create-post-dialog/create-post-dialog.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { PostComponent } from './pages/protected/home/post/post.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     HeaderComponent,
     SearchFriendComponent,
     FriendsManagementComponent,
-    CreatePostDialogComponent
+    CreatePostDialogComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,28 @@
 <div class="in-middle">
   <div class="main flex flex-col items-center">
-    <button mat-button color="primary" class="mb-4" (click)="openDialog()">
-      Add post
-<!--      <fa-icon [icon]="faPlus"></fa-icon>-->
-    </button>
-    <mat-card class="w-100">
-      <div class="mat-elevation-z4">
-        <div class="p-2">
-          <p>home works!</p>
-        </div>
+
+
+    <div class="flex w-100">
+      <div class="side-panel">
+        <button mat-button color="primary" class="mb-4 w-100" (click)="openDialog()">
+          Add post
+        </button>
+        <mat-card>
+          Online friends adsfasdfa fadsfasdfasd
+        </mat-card>
+      </div>
+      <div class="main-content">
+        <mat-card>
+          <app-post></app-post>
+          <app-post></app-post>
+          <app-post></app-post>
+          <app-post></app-post>
+          <app-post></app-post>
+        </mat-card>
       </div>
 
-    </mat-card>
+    </div>
+
   </div>
 </div>
 
