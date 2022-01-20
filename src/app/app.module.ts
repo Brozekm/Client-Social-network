@@ -36,7 +36,9 @@ import {SearchFriendComponent} from './pages/protected/friends/search-friend/sea
 import {FriendsManagementComponent} from './pages/protected/friends/friends-management/friends-management.component';
 import {CreatePostDialogComponent} from './pages/protected/home/create-post-dialog/create-post-dialog.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { PostComponent } from './pages/protected/home/post/post.component';
+import { PostComponent } from './pages/protected/home/posts/post/post.component';
+import { PostsComponent } from './pages/protected/home/posts/posts.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { PostComponent } from './pages/protected/home/post/post.component';
     SearchFriendComponent,
     FriendsManagementComponent,
     CreatePostDialogComponent,
-    PostComponent
+    PostComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { PostComponent } from './pages/protected/home/post/post.component';
     MatTableModule,
     MatPaginatorModule,
     MatSlideToggleModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [
     AuthGuard,

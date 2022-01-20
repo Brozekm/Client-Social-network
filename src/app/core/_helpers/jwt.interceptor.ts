@@ -26,7 +26,6 @@ export class JwtInterceptor implements HttpInterceptor {
     let userRaw = localStorage.getItem('user');
     if (userRaw) {
       let user: UserInterface = JSON.parse(userRaw);
-      console.log("Auth")
       if (user) {
         request = request.clone({
           setHeaders: {

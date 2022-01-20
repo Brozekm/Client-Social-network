@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostDialogComponent} from "./create-post-dialog/create-post-dialog.component";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {UserInterface} from "../../../core/_dataTypes/user-interface";
-import {AuthenticationService} from "../../../core/_service/auth/authentication.service";
 import {Router} from "@angular/router";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  faPlus = faPlus;
+  obs: Subject<boolean> = new Subject<boolean>();
 
   constructor(private dialog: MatDialog,
               private router: Router) { }
@@ -27,6 +26,10 @@ export class HomeComponent implements OnInit {
       this.dialog.open(CreatePostDialogComponent,{
         data:{
           role: user.role
+        }
+      }).afterClosed().subscribe(value => {
+        if (value) {
+          this.obs.next(true);
         }
       });
     }else{

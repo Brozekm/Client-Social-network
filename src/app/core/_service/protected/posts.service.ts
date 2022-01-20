@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {PostRequest} from "../../_dataTypes/PostRequest";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {PostRequest} from "../../_dataTypes/postRequest";
+import {PostInterface} from "../../_dataTypes/post-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,32 @@ export class PostsService {
         reject(error);
       })
     })
+  }
+
+  public getPosts(offset: number): Promise<PostInterface[]>{
+    let params = new HttpParams()
+      .set('offset', offset);
+    return new Promise<PostInterface[]>((resolve, reject) => {
+      this.http.get(this.URL + '/api/posts', {params: params}).subscribe(value => {
+        let posts: PostInterface[] = value as PostInterface[];
+        resolve(posts);
+      },error => {
+        reject(error);
+      })
+    });
+  }
+
+  public getNewerPosts(date: Date): Promise<PostInterface[]>{
+    let params = new HttpParams()
+      .set('from', date.toString());
+    return new Promise<PostInterface[]>((resolve, reject) => {
+      this.http.get(this.URL + '/api/posts/new', {params: params}).subscribe(value => {
+        let posts: PostInterface[] = value as PostInterface[];
+        resolve(posts);
+      },error => {
+        reject(error);
+      })
+    });
   }
 
 }

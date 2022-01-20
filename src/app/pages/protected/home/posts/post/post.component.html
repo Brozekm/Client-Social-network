@@ -1,0 +1,32 @@
+<div *ngIf="post">
+  <div class="mb-4"
+       [ngClass]="{'dark-bg': post.postType === 'ANNOUNCEMENT',
+       'mat-elevation-z4': post.postType !== 'ANNOUNCEMENT',
+       'mat-elevation-z24': post.postType === 'ANNOUNCEMENT'}">
+    <div class="p-4">
+      <div class="header">
+        <div class="user-info">
+          <span class="username" style="color: #ffc107">{{post.userName}} </span>
+          <span class="opacity-70">({{post.email}})</span>
+          <br>
+          <span>{{post.createdAt | date : 'short'}}</span>
+        </div>
+        <div class="flex">
+          <div *ngIf="logged === post.email">
+            <fa-icon [icon]="faUser" size="lg" class="blob"></fa-icon>
+          </div>
+
+          <div *ngIf="post.postType === 'ANNOUNCEMENT'" style="color: #ffc107">
+            <fa-icon [icon]="faInfo" size="lg" class="blob"></fa-icon>
+          </div>
+        </div>
+      </div>
+      <hr class="my-2">
+      <div class="opacity-90">
+        {{post.message}}
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<mat-card>
+  <div *ngIf="loaded$.getValue()">
+    <div *ngFor="let post of data">
+      <app-post [post]="post" [logged]="loggedEmail"></app-post>
+    </div>
+
+
+    <div class="flex justify-center">
+        <span *ngIf="olderExist" style="letter-spacing: 0.2ch">
+          There are not any older posts
+        </span>
+    </div>
+
+    <button mat-button color="primary" class="w-100" (click)="loadOlderPosts()" [disabled]="olderExist">
+      <fa-icon [icon]="faArrowDown"></fa-icon>
+    </button>
+  </div>
+</mat-card>

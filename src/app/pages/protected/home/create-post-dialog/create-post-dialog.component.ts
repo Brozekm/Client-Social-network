@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostsService} from "../../../../core/_service/protected/posts.service";
-import {EnumPostType, PostRequest} from "../../../../core/_dataTypes/PostRequest";
+import {EnumPostType, PostRequest} from "../../../../core/_dataTypes/postRequest";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {EnumRole} from "../../../../core/_dataTypes/user-interface";
 
@@ -42,7 +42,7 @@ export class CreatePostDialogComponent implements OnInit {
       let request: PostRequest = new PostRequest(message, postType);
       this.postService.createPost(request).then(()=>{
         this._snackBar.open(responseMsg+' created', 'OK', {duration: 2000});
-        this.dialogRef.close();
+        this.dialogRef.close(true);
       })
   }
 
