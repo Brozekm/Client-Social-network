@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {UserInterface} from "../../_dataTypes/user-interface";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {OnlineFriendsService} from "../protected/onlineFriends.service";
+import {WebSocketService} from "../protected/web-socket.service";
 
 
 @Injectable({
@@ -12,18 +14,18 @@ export class AuthenticationService {
 
   readonly URL = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private wsService: WebSocketService) {
   }
 
   public login(email: string, password: string): Observable<boolean> {
     return new Observable(subscriber => {
       this.http.post(this.URL + '/login', {email: email, password: password})
         .subscribe(value => {
-          console.log(value);
           let user: UserInterface = value as UserInterface;
-          console.log(user);
           if (user) {
             localStorage.setItem('user', JSON.stringify(user));
+            this.wsService.createConnection();
             subscriber.next(true);
             subscriber.complete();
           } else {
@@ -50,7 +52,21 @@ export class AuthenticationService {
     });
   }
 
+  public getJwtToken(): string | null {
+    let userRaw = localStorage.getItem('user');
+    if (userRaw) {
+      let user: UserInterface = JSON.parse(userRaw);
+      if (user) {
+        return `Bearer ${user.jwttoken}`;
+      }
+    }
+    return null;
+  }
+
+
+
   public logout() {
+    this.wsService.wsDisconnect();
     localStorage.removeItem('user');
   }
 }
