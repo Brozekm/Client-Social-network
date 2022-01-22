@@ -36,7 +36,6 @@ export class OnlineFriendsService {
     let token = this.wsService.token;
     if (token) {
       if (this.wsService.client) {
-        console.log("Subscribing to /user/queue/online-friends");
         this.wsService.client.subscribe('/user/queue/online-friends', message => {
 
           let response: OnlineFriendInterface[] = JSON.parse(message.body) as OnlineFriendInterface[];
