@@ -1,13 +1,19 @@
 <div class="in-middle">
-  <div class="main flex flex-col items-center">
+  <div class="main flex items-center">
 
-    <div class="flex w-100">
+    <div class="wrapper">
       <div class="side-panel">
         <button mat-button color="primary" class="mb-4 w-100" (click)="openDialog()">
           Add post
         </button>
         <mat-card>
-          Online friends adsfasdfa fadsfasdfasd
+          <h3 style="color: #ffc107" class="text-center">Online friends</h3>
+          <hr>
+          <div *ngFor="let friend of online" class="pt-2 friend">
+            <span class="username">{{friend.userName}}</span>
+            <br>
+            <span class="opacity-80">{{friend.email}}</span>
+          </div>
         </mat-card>
       </div>
 

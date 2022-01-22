@@ -1,8 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Client, StompSubscription} from "@stomp/stompjs";
-import {client} from "stompjs";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {AuthenticationService} from "../auth/authentication.service";
+import {Injectable, OnInit} from '@angular/core';
+import {Client} from "@stomp/stompjs";
+import {BehaviorSubject} from "rxjs";
 import {UserInterface} from "../../_dataTypes/user-interface";
 
 export enum SocketClientState {
@@ -12,7 +10,7 @@ export enum SocketClientState {
 @Injectable({
   providedIn: 'root'
 })
-export class WebSocketService {
+export class WebSocketService{
 
   private _client?: Client;
 
@@ -22,9 +20,17 @@ export class WebSocketService {
 
   private _token?: string;
 
+
   constructor() {
     this._socketState = new BehaviorSubject<SocketClientState>(SocketClientState.ATTEMPTING);
+    if (localStorage.getItem('user')){
+      if (!this._client){
+        console.log("Create connection")
+        this.createConnection();
+      }
+    }
   }
+
 
 
   get client(): Client | null {
@@ -36,14 +42,14 @@ export class WebSocketService {
 
   public createConnection() {
     this._token = this.getToken();
-    if (this._token){
+    if (this._token) {
       this._client = new Client({
         brokerURL: this.socketConnectionUrl,
         reconnectDelay: 5000,
         onDisconnect: receipt => {
           console.log(receipt)
         },
-        connectHeaders:{
+        connectHeaders: {
           Authorization: this._token
         },
         onConnect: receipt => {
@@ -67,8 +73,9 @@ export class WebSocketService {
     return undefined;
   }
 
-  public wsDisconnect(){
-    if (this._client){
+  public wsDisconnect() {
+    this._socketState.next(SocketClientState.ATTEMPTING);
+    if (this._client) {
       this._client.deactivate();
     }
   }
@@ -80,7 +87,6 @@ export class WebSocketService {
   get socketState(): BehaviorSubject<SocketClientState> {
     return this._socketState;
   }
-
 
 
 }

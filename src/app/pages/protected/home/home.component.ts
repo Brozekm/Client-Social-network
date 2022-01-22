@@ -1,19 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostDialogComponent} from "./create-post-dialog/create-post-dialog.component";
 import {UserInterface} from "../../../core/_dataTypes/user-interface";
 import {Router} from "@angular/router";
-import {Subject} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {WebSocketService} from "../../../core/_service/protected/web-socket.service";
 import {OnlineFriendsService} from "../../../core/_service/protected/onlineFriends.service";
+import {OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   obs: Subject<boolean> = new Subject<boolean>();
+
+  online: OnlineFriendInterface[] = [];
+
+  data: Subscription = new Subscription();
 
   constructor(private dialog: MatDialog,
               private router: Router,
@@ -21,14 +26,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const client = new Client({brokerURL: 'http://localhost:8080/app/socket/online',
-    // reconnectDelay: 5000,
-    // onDisconnect: receipt => {console.log(receipt)}});
-    // client.activate();
+    this.online = this.onlineFriends.online$.getValue();
+    this.data = this.onlineFriends.online$.subscribe(value => {
+      this.online = value;
+    });
+  }
 
-    // this.wsService.connect('ws://localhost:8080/ws/online').subscribe(client => {
-    //   console.log('got Client');
-    // });
+  ngOnDestroy(): void{
+    this.data.unsubscribe();
   }
 
 

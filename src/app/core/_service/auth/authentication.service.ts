@@ -67,6 +67,7 @@ export class AuthenticationService {
 
   public logout() {
     this.wsService.wsDisconnect();
+    // this.onlineService.
     localStorage.removeItem('user');
   }
 }
