@@ -84,7 +84,6 @@ export class ChatService {
   }
 
   getConversation(withWho: string): Conversation | undefined{
-    console.log("WHO");
     return this.conversationMap.get(withWho);
   }
 

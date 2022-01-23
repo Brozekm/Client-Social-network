@@ -7,6 +7,7 @@ import {Subject, Subscription} from "rxjs";
 import {OnlineFriendsService} from "../../../core/_service/protected/onlineFriends.service";
 import {EnumOnlineStatus, OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
 import {ChatService} from "../../../core/_service/protected/chat.service";
+import {userError} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     status: EnumOnlineStatus.ONLINE
   }
 
+  chat: Subscription = new Subscription();
+
   constructor(private dialog: MatDialog,
               private router: Router,
               private onlineFriends: OnlineFriendsService,
@@ -38,10 +41,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.data = this.onlineFriends.online$.subscribe(value => {
       this.online = value;
     });
+
+    this.chat = this.chatService.newMessage$.subscribe(value => {
+      if (!this.displayChat){
+        if (this.online.length > 0){
+          let user: OnlineFriendInterface | undefined = this.online.find(x => x.email === value.targetUser);
+          if (user){
+            this.openChat(user);
+          }
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void{
     this.data.unsubscribe();
+    this.chat.unsubscribe();
   }
 
 
