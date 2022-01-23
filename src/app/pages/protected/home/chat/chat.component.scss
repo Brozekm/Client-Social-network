@@ -1,0 +1,85 @@
+.main{
+  position: fixed;
+  max-height: 25rem;
+  height: 100%;
+}
+
+.card-shadow{
+  box-shadow: 0 0 0.5rem 0 #ffc107
+}
+
+.card-shadow:hover, .card-shadow:focus{
+  box-shadow: 0 0 1rem 0 #ffc107
+}
+
+.mat-card-header{
+  background-color:#303030 !important;
+  padding-top: 0.7rem !important;
+  padding-left: 0.7rem !important;
+  border-radius: inherit;
+}
+
+.mat-card{
+  padding:0 !important;
+}
+
+.mat-card-content{
+  padding:5px !important;
+}
+
+
+.exit-button{
+  position: fixed;
+}
+mat-card{
+  display:flex;
+  flex-direction: column;
+}
+
+.mat-card-header {
+  flex-shrink: 0;
+}
+
+.mat-card-content{
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.card-action{
+  padding: 0 !important;
+  margin: 0 !important;
+  //height: 2rem;
+  background-color: #303030;
+  border-radius: inherit;
+}
+.send-button:hover{
+  color: #ffc107;
+}
+.send-button:disabled{
+  color: white;
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 600px){
+  .main{
+    //height: available;
+    width: 20rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .exit-button{
+    right: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .main{
+    height: 70%;
+    width: 90%;
+    right: 1.5rem;
+    bottom: 6rem;
+  }
+  .exit-button{
+    right: 2rem;
+  }
+}

@@ -12,12 +12,12 @@ export class ChatService {
 
   private conversationMap: Map<string, Conversation>;
 
-  newMessage$: BehaviorSubject<UserMessage>;
+  private _newMessage$: BehaviorSubject<UserMessage>;
 
-  sub: Subscription;
+  private sub: Subscription;
 
   constructor(private wsService: WebSocketService) {
-    this.newMessage$ = new BehaviorSubject<UserMessage>(new UserMessage("",""));
+    this._newMessage$ = new BehaviorSubject<UserMessage>(new UserMessage("",""));
     this.conversationMap = new Map<string, Conversation>();
 
     this.sub = wsService.socketState.subscribe(value => {
@@ -32,7 +32,7 @@ export class ChatService {
 
   private deleteData() {
     this.conversationMap = new Map<string, Conversation>();
-    this.newMessage$ = new BehaviorSubject<UserMessage>(new UserMessage("",""));
+    this._newMessage$ = new BehaviorSubject<UserMessage>(new UserMessage("",""));
   }
 
   private subscribeToChat() {
@@ -56,7 +56,7 @@ export class ChatService {
 
           }
 
-          this.newMessage$.next(userMessage);
+          this._newMessage$.next(userMessage);
         }, {Authorization: token});
       }
     }
@@ -78,6 +78,10 @@ export class ChatService {
         Authorization: token
       }
     })
+  }
+
+  get newMessage$(): Observable<UserMessage> {
+    return this._newMessage$.asObservable();
   }
 
   getConversation(withWho: string): Conversation | undefined{

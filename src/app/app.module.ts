@@ -39,6 +39,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { PostComponent } from './pages/protected/home/posts/post/post.component';
 import { PostsComponent } from './pages/protected/home/posts/posts.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { ChatComponent } from './pages/protected/home/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     FriendsManagementComponent,
     CreatePostDialogComponent,
     PostComponent,
-    PostsComponent
+    PostsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

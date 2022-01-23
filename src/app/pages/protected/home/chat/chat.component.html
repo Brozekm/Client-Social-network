@@ -1,0 +1,42 @@
+<div class="main">
+  <mat-card class="h-100 w-100 card-shadow">
+    <mat-card-header class="flex">
+      <div mat-card-avatar class="flex justify-center items-center">
+        <fa-icon [icon]="faUser" size="2x"></fa-icon>
+      </div>
+
+      <mat-card-title>Test</mat-card-title>
+      <mat-card-subtitle>test1@gmail.com</mat-card-subtitle>
+      <div class="exit-button">
+        <button mat-icon-button color="primary">
+          <fa-icon [icon]="faTimes" size="2x"></fa-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="card-content">
+        <p>chat works!</p>
+        <p style="align-self: end">asdfasdf</p>
+      </div>
+
+
+    </mat-card-content>
+
+    <mat-card-actions class="card-action">
+      <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <div class="flex justify-center items-center mx-4">
+          <mat-form-field class="w-100 mr-2" appearance="standard">
+            <input matInput type="text" formControlName="message">
+            <button matSuffix mat-icon-button [disabled]="!messageForm.valid" type="submit">
+              <fa-icon [icon]="faPaperPlane"></fa-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-actions>
+    <!--    <mat-card-actions style="margin: 0; padding: 0; height: 2rem">-->
+    <!--      asdf-->
+    <!--    </mat-card-actions>-->
+
+  </mat-card>
+</div>

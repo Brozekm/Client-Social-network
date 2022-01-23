@@ -58,8 +58,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.router.navigate(['/login']);
     }
   }
-
-  sendMessage() {
-    this.chatService.sendMessage("test1@gmail.com", "Prvni zprava, whats up?");
-  }
 }
