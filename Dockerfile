@@ -7,6 +7,5 @@ RUN npm run build
 FROM nginx:latest as runner
 COPY --from=builder /app/dist/client /usr/share/nginx/html
 
-EXPOSE 80
 
 
