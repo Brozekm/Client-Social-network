@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {faPaperPlane, faTimes, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ChatService} from "../../../../core/_service/protected/chat.service";
@@ -13,7 +13,7 @@ import {EnumOnlineStatus, OnlineFriendInterface} from "../../../../core/_dataTyp
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, OnChanges {
   @Input() targetUser: OnlineFriendInterface = {
     email: '',
     userName: '',
@@ -26,7 +26,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   faTimes = faTimes;
   faPaperPlane = faPaperPlane;
 
-  // targetUser:string = 'test1@gmail.com';
 
   sub: Subscription = new Subscription();
 
@@ -39,13 +38,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(private chatService: ChatService) {
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.conversation = new Conversation();
     let first: boolean = true;
     let tmpConv = this.chatService.getConversation(this.targetUser.email);
     if (tmpConv) {
       this.conversation.messages = this.conversation.messages.concat(tmpConv.messages);
     } else {
-      this.conversation = new Conversation();
       first = false;
     }
 
@@ -54,6 +53,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         first ? first = false : this.conversation.addMessage(new ClientMessage(EnumMessageState.INGOING, value.message));
       })
+  }
+
+  ngOnInit(): void {
+    console.log("OPENING CHAT");
   }
 
   ngOnDestroy() {

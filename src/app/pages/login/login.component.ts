@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private authService: AuthenticationService,
-              private router: Router) { }
+              private router: Router,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.authService.logout();
@@ -46,11 +47,7 @@ export class LoginComponent implements OnInit {
         }
       }, error => {
         if (error instanceof HttpErrorResponse && error.status === 400){
-          this.loginForm.controls['email'].setErrors({'incorrect': true});
-          this.loginForm.controls['password'].setErrors({'incorrect': true});
-        }else {
-          this.loginForm.controls['email'].setErrors({'incorrect': false});
-          this.loginForm.controls['password'].setErrors({'incorrect': false});
+          this._snackBar.open('Wrong credentials', 'OK', {duration: 2000});
         }
       })
   }

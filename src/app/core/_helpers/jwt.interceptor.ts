@@ -39,9 +39,7 @@ export class JwtInterceptor implements HttpInterceptor {
       tap((res: any) => {
         return res;
       }, e => {
-          console.log('Handling error');
           if (e instanceof HttpErrorResponse){
-            console.log('ERROR is http response');
             switch (e.status){
               case (0):
               case (HttpError.InternalServerError):
@@ -49,12 +47,15 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.router.navigate(['/login']);
                 break
               case (HttpError.Unauthorized):
-                this._snackBar.open('Server is down! Try again later', 'OK');
+                this._snackBar.open('Unauthorized', 'OK');
                 this.router.navigate(['/login']);
                 break;
               case (HttpError.BadRequest):
                 // login and register has its own error handling
-                if (e.url != (this.auth.URL + '/login') || e.url != (this.auth.URL + '/register')){
+                console.log("Bad request");
+                if (e.url?.endsWith('login') || e.url?.endsWith('register')){
+                  break;
+                }else{
                   this._snackBar.open('Bad request! Try again later', 'OK');
                 }
                 break

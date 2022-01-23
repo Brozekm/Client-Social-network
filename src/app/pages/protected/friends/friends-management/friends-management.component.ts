@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {SearchedUserInterface} from "../../../../core/_dataTypes/searchedUser-interface";
 import {BehaviorSubject} from "rxjs";
 import {FriendshipsService} from "../../../../core/_service/protected/friendships.service";
 import {EmailUsernameInterface} from "../../../../core/_dataTypes/emailUsername-interface";
