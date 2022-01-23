@@ -7,7 +7,6 @@ import {Subject, Subscription} from "rxjs";
 import {OnlineFriendsService} from "../../../core/_service/protected/onlineFriends.service";
 import {EnumOnlineStatus, OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
 import {ChatService} from "../../../core/_service/protected/chat.service";
-import {userError} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-home',
@@ -81,7 +80,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openChat(friend: OnlineFriendInterface) {
-    this.displayChat = false;
     this.onlineFriend = friend;
     this.displayChat = true;
   }
