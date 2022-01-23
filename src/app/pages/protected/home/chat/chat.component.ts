@@ -63,7 +63,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   sendMessage() {
     let message: string = this.messageForm.controls['message'].value;
     if (!message || message.length === 0) return;
-    console.log(this.conversation);
+
     this.conversation.addMessage(new ClientMessage(EnumMessageState.OUTGOING, message));
     this.messageForm.controls['message'].setValue('');
     this.chatService.sendMessage(this.targetUser.email, message);
