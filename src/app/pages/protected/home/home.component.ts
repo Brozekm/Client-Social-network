@@ -7,6 +7,7 @@ import {Subject, Subscription} from "rxjs";
 import {WebSocketService} from "../../../core/_service/protected/web-socket.service";
 import {OnlineFriendsService} from "../../../core/_service/protected/onlineFriends.service";
 import {OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
+import {ChatService} from "../../../core/_service/protected/chat.service";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private dialog: MatDialog,
               private router: Router,
-              private onlineFriends: OnlineFriendsService) {
+              private onlineFriends: OnlineFriendsService,
+              private chatService: ChatService) {
   }
 
   ngOnInit(): void {
@@ -35,6 +37,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void{
     this.data.unsubscribe();
   }
+
+
 
 
   openDialog() {
@@ -53,5 +57,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  sendMessage() {
+    this.chatService.sendMessage("test1@gmail.com", "Prvni zprava, whats up?");
   }
 }
