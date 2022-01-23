@@ -25,7 +25,6 @@ export class WebSocketService{
     this._socketState = new BehaviorSubject<SocketClientState>(SocketClientState.ATTEMPTING);
     if (localStorage.getItem('user')){
       if (!this._client){
-        console.log("Create connection")
         this.createConnection();
       }
     }

@@ -45,6 +45,16 @@ mat-card{
   overflow: auto;
 }
 
+.mat-card-content::-webkit-scrollbar{
+  width: 0.25rem;
+}
+.mat-card-content::-webkit-scrollbar-track{
+  background: #424242;
+}
+.mat-card-content::-webkit-scrollbar-thumb{
+  background: #ffc107;
+}
+
 .card-action{
   padding: 0 !important;
   margin: 0 !important;
@@ -59,6 +69,7 @@ mat-card{
   color: white;
   opacity: 0.5;
 }
+
 
 @media only screen and (min-width: 600px){
   .main{

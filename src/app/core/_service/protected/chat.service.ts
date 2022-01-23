@@ -44,17 +44,12 @@ export class ChatService {
           let userMessage = JSON.parse(message.body) as UserMessage;
           if (!userMessage) return;
 
-          if (this.conversationMap.has(userMessage.targetUser)){
-
-              this.conversationMap.get(userMessage.targetUser)?.addMessage(
-                new ClientMessage(EnumMessageState.INGOING, userMessage.message));
-
-          }else{
-
-            this.conversationMap.set(userMessage.targetUser,
-              new Conversation([new ClientMessage(EnumMessageState.INGOING, userMessage.message)]));
-
+          if (!this.conversationMap.has(userMessage.targetUser)){
+            this.conversationMap.set(userMessage.targetUser, new Conversation());
           }
+
+          this.conversationMap.get(userMessage.targetUser)?.addMessage(
+            new ClientMessage(EnumMessageState.INGOING, userMessage.message));
 
           this._newMessage$.next(userMessage);
         }, {Authorization: token});
@@ -67,6 +62,10 @@ export class ChatService {
     let token = this.wsService.token;
     let userMessage = new UserMessage(to, message);
     if (!token) return;
+
+    if (!this.conversationMap.has(to)){
+      this.conversationMap.set(to, new Conversation());
+    }
 
     this.conversationMap.get(to)?.addMessage(
       new ClientMessage(EnumMessageState.OUTGOING, message));
@@ -85,6 +84,7 @@ export class ChatService {
   }
 
   getConversation(withWho: string): Conversation | undefined{
+    console.log("WHO");
     return this.conversationMap.get(withWho);
   }
 

@@ -4,9 +4,8 @@ import {CreatePostDialogComponent} from "./create-post-dialog/create-post-dialog
 import {UserInterface} from "../../../core/_dataTypes/user-interface";
 import {Router} from "@angular/router";
 import {Subject, Subscription} from "rxjs";
-import {WebSocketService} from "../../../core/_service/protected/web-socket.service";
 import {OnlineFriendsService} from "../../../core/_service/protected/onlineFriends.service";
-import {OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
+import {EnumOnlineStatus, OnlineFriendInterface} from "../../../core/_dataTypes/online-friend.interface";
 import {ChatService} from "../../../core/_service/protected/chat.service";
 
 @Component({
@@ -20,6 +19,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   online: OnlineFriendInterface[] = [];
 
   data: Subscription = new Subscription();
+
+  displayChat: boolean = false;
+  onlineFriend: OnlineFriendInterface = {
+    email: '',
+    userName: '',
+    status: EnumOnlineStatus.ONLINE
+  }
 
   constructor(private dialog: MatDialog,
               private router: Router,
@@ -57,5 +63,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  openChat(friend: OnlineFriendInterface) {
+    this.displayChat = false;
+    this.onlineFriend = friend;
+    this.displayChat = true;
+  }
+
+  closeChat() {
+    this.displayChat = false;
   }
 }

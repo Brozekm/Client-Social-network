@@ -5,20 +5,36 @@
         <fa-icon [icon]="faUser" size="2x"></fa-icon>
       </div>
 
-      <mat-card-title>Test</mat-card-title>
-      <mat-card-subtitle>test1@gmail.com</mat-card-subtitle>
+      <mat-card-title>{{targetUser.userName}}</mat-card-title>
+      <mat-card-subtitle>{{targetUser.email}}</mat-card-subtitle>
+
       <div class="exit-button">
-        <button mat-icon-button color="primary">
+        <button mat-icon-button color="primary" (click)="closeChatEvent.emit(true)">
           <fa-icon [icon]="faTimes" size="2x"></fa-icon>
         </button>
       </div>
     </mat-card-header>
-    <mat-card-content>
-      <div class="card-content">
-        <p>chat works!</p>
-        <p style="align-self: end">asdfasdf</p>
-      </div>
 
+
+    <mat-card-content>
+      <div *ngFor="let message of conversation.messages">
+        <div *ngIf="message.state === 0" class="w-100 flex justify-end mr-1">
+          <div class="p-2" style="background-color: rgba(255,193,7,0.5); border-radius: 1rem">
+            <span>{{message.message}}</span>
+          </div>
+<!--          <p>{{message.message}}</p>-->
+        </div>
+<!--          <p *ngIf="message.state === 0"-->
+<!--             style="display: flex;width: 100%; justify-content: flex-end ;color: red;">{{message.message}}</p>-->
+<!--          <p *ngIf="message.state === 1">{{message.message}}</p>-->
+        <div *ngIf="message.state === 1" class="w-100 flex ml-1">
+          <div class="p-2" style="background-color: rgba(48,48,48, 0.8); border-radius: 1rem">
+            <span>{{message.message}}</span>
+          </div>
+
+        </div>
+        <br>
+      </div>
 
     </mat-card-content>
 
@@ -34,9 +50,6 @@
         </div>
       </form>
     </mat-card-actions>
-    <!--    <mat-card-actions style="margin: 0; padding: 0; height: 2rem">-->
-    <!--      asdf-->
-    <!--    </mat-card-actions>-->
 
   </mat-card>
 </div>

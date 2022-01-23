@@ -1,13 +1,23 @@
 import {ClientMessage} from "./client-message";
 
 export class Conversation {
-  messages: ClientMessage[];
+  private _messages: ClientMessage[];
 
   constructor(messages?: ClientMessage[]) {
-    messages ? this.messages = messages : this.messages = [];
+    messages ? this._messages = messages : this._messages = [];
   }
 
   public addMessage(message: ClientMessage){
-    this.messages.push(message);
+    this._messages.push(message);
+  }
+
+
+  get messages(): ClientMessage[] {
+    return this._messages;
+  }
+
+
+  set messages(value: ClientMessage[]) {
+    this._messages = value;
   }
 }
