@@ -37,8 +37,9 @@ export class HeaderComponent implements OnInit {
         this.changeHeader('Messenger');
         break;
       default:
-        this.changeHeader('Unknown');
-        console.log('Unknown url');
+        this.changeHeader('');
+        // this.changeHeader('Unknown');
+        // console.log('Unknown url');
     }
   }
 

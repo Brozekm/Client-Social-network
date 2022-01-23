@@ -3,6 +3,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../core/_service/auth/authentication.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-dialog',
@@ -30,12 +31,18 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   registerUser(value: any) {
+    if (!this.registerForm.valid) return;
+
     this.authService.register(value.email, value.password, value.username).subscribe(() => {
         this._snackBar.open("Account created", "OK", {duration: 3000});
         this.dialogRef.close();
       }, error => {
-      this._snackBar.open("Registration failed", "OK");
-      this.dialogRef.close();
+        if (error instanceof HttpErrorResponse && error.status === 400) {
+          this._snackBar.open("Email taken", "OK");
+        } else {
+          this._snackBar.open("Registration failed", "OK");
+          this.dialogRef.close();
+        }
       }
     )
   }

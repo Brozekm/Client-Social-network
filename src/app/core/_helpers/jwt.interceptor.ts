@@ -52,7 +52,6 @@ export class JwtInterceptor implements HttpInterceptor {
                 break;
               case (HttpError.BadRequest):
                 // login and register has its own error handling
-                console.log("Bad request");
                 if (e.url?.endsWith('login') || e.url?.endsWith('register')){
                   break;
                 }else{
