@@ -23,15 +23,21 @@ export class CreatePostDialogComponent implements OnInit {
     announcement: new FormControl('')
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Role,
+  isAdmin: boolean = false;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Roles,
     public dialogRef: MatDialogRef<CreatePostDialogComponent>,
               private postService: PostsService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar) {
+    this.isAdmin = data.roles.some(role => role === EnumRole.ADMIN);
+  }
 
   ngOnInit(): void {
   }
 
   createPost() {
+      if (!this.addPostForm.valid) return;
+
       let message: string = this.addPostForm.controls['message'].value;
       let postType: EnumPostType = EnumPostType.NORMAL;
       let responseMsg: string = 'Post';
@@ -48,6 +54,7 @@ export class CreatePostDialogComponent implements OnInit {
 
 }
 
-interface Role{
-  role: EnumRole
+interface Roles{
+  roles: EnumRole[]
 }
+

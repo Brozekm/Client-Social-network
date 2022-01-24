@@ -7,5 +7,5 @@ export interface UserInterface {
   email: string,
   userName: string,
   jwttoken: string,
-  role?: EnumRole;
+  roles?: EnumRole[];
 }

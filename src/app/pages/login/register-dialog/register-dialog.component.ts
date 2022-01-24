@@ -63,5 +63,18 @@ export class RegisterDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+
+  isEmailTaken() {
+    if (this.registerForm.controls['email'].valid){
+      let email = this.registerForm.controls['email'].value;
+      this.authService.isEmailTaken(email).then(value => {
+        if (value){
+          this.registerForm.controls['email'].setErrors({'taken': true});
+        }else{
+          this.registerForm.controls['email'].setErrors(null);
+        }
+      })
+    }
+  }
 }
 

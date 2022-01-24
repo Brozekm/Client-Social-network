@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       let user: UserInterface = JSON.parse(userRaw);
       this.dialog.open(CreatePostDialogComponent, {
         data: {
-          role: user.role
+          roles: user.roles
         }
       }).afterClosed().subscribe(value => {
         if (value) {

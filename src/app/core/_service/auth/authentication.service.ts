@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserInterface} from "../../_dataTypes/user-interface";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
@@ -50,6 +50,18 @@ export class AuthenticationService {
           subscriber.error(error);
         })
     });
+  }
+
+  public isEmailTaken(email: string){
+    let params = new HttpParams()
+      .set('email', email);
+    return new Promise<boolean>((resolve) => {
+      this.http.get(this.URL + '/register/email', {params: params}).subscribe(value => {
+        resolve(value as boolean);
+      }, error => {
+        console.error(error);
+      })
+    })
   }
 
   public logout() {
