@@ -52,22 +52,8 @@ export class AuthenticationService {
     });
   }
 
-  public getJwtToken(): string | null {
-    let userRaw = localStorage.getItem('user');
-    if (userRaw) {
-      let user: UserInterface = JSON.parse(userRaw);
-      if (user) {
-        return `Bearer ${user.jwttoken}`;
-      }
-    }
-    return null;
-  }
-
-
-
   public logout() {
     this.wsService.wsDisconnect();
-    // this.onlineService.
     localStorage.removeItem('user');
   }
 }

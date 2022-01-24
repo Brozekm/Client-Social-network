@@ -7,7 +7,7 @@ import {PostInterface} from "../../_dataTypes/post-interface";
   providedIn: 'root'
 })
 export class PostsService {
-  readonly URL = 'http://localhost:8080';
+  readonly URL = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {
   }
@@ -15,7 +15,7 @@ export class PostsService {
 
   public createPost(post: PostRequest): Promise<boolean>{
     return new Promise<boolean>((resolve, reject) => {
-      this.http.post(this.URL + '/api/posts', {message: post.message, type: post.type}).subscribe(() => {
+      this.http.post(this.URL + '/posts', {message: post.message, type: post.type}).subscribe(() => {
         resolve(true);
       }, error => {
         reject(error);
@@ -27,7 +27,7 @@ export class PostsService {
     let params = new HttpParams()
       .set('offset', offset);
     return new Promise<PostInterface[]>((resolve, reject) => {
-      this.http.get(this.URL + '/api/posts', {params: params}).subscribe(value => {
+      this.http.get(this.URL + '/posts', {params: params}).subscribe(value => {
         let posts: PostInterface[] = value as PostInterface[];
         resolve(posts);
       },error => {
@@ -40,7 +40,7 @@ export class PostsService {
     let params = new HttpParams()
       .set('from', date.toString());
     return new Promise<PostInterface[]>((resolve, reject) => {
-      this.http.get(this.URL + '/api/posts/new', {params: params}).subscribe(value => {
+      this.http.get(this.URL + '/posts/new', {params: params}).subscribe(value => {
         let posts: PostInterface[] = value as PostInterface[];
         resolve(posts);
       },error => {
