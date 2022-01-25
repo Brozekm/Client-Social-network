@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.maxLength(20)])
+    password: new FormControl('', [Validators.required])
   });
 
 
@@ -40,15 +40,17 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(value: any) {
-    this.authService.login(value.email, value.password)
-      .subscribe(value => {
-        if (value){
-          this.router.navigate(['../'])
-        }
-      }, error => {
-        if (error instanceof HttpErrorResponse && error.status === 400){
-          this._snackBar.open('Wrong credentials', 'OK', {duration: 2000});
-        }
-      })
+    if (this.loginForm.valid){
+      this.authService.login(value.email, value.password)
+        .subscribe(value => {
+          if (value){
+            this.router.navigate(['../'])
+          }
+        }, error => {
+          if (error instanceof HttpErrorResponse && error.status === 400){
+            this._snackBar.open('Wrong credentials', 'OK', {duration: 2000});
+          }
+        })
+    }
   }
 }

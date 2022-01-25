@@ -42,7 +42,6 @@ export class AuthenticationService {
     return new Observable(subscriber => {
       this.http.post(this.URL + '/register', {email: email, password: password, userName: username})
         .subscribe(value => {
-          console.log(value);
           subscriber.next(true);
           subscriber.complete();
         }, error => {

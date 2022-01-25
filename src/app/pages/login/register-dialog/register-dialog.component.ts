@@ -37,11 +37,19 @@ export class RegisterDialogComponent implements OnInit {
         this._snackBar.open("Account created", "OK", {duration: 3000});
         this.dialogRef.close();
       }, error => {
-        if (error instanceof HttpErrorResponse && error.status === 400) {
-          this._snackBar.open("Email taken", "OK");
-        } else {
-          this._snackBar.open("Registration failed", "OK");
-          this.dialogRef.close();
+        if (error instanceof HttpErrorResponse) {
+          switch (error.status) {
+            case (200):
+              this._snackBar.open("Weak password", "OK");
+              break;
+            case (400):
+              this._snackBar.open("Email taken", "OK");
+              break;
+            default:
+              this._snackBar.open("Registration failed", "OK");
+              this.dialogRef.close();
+              break;
+          }
         }
       }
     )
@@ -65,12 +73,12 @@ export class RegisterDialogComponent implements OnInit {
   }
 
   isEmailTaken() {
-    if (this.registerForm.controls['email'].valid){
+    if (this.registerForm.controls['email'].valid) {
       let email = this.registerForm.controls['email'].value;
       this.authService.isEmailTaken(email).then(value => {
-        if (value){
+        if (value) {
           this.registerForm.controls['email'].setErrors({'taken': true});
-        }else{
+        } else {
           this.registerForm.controls['email'].setErrors(null);
         }
       })
