@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostDialogComponent} from "./create-post-dialog/create-post-dialog.component";
 import {EnumRole, UserInterface} from "../../../core/_dataTypes/user-interface";
@@ -92,4 +92,5 @@ export class HomeComponent implements OnInit, OnDestroy {
   openChangeRoleDialog() {
     this.dialog.open(ChangeRoleDialogComponent);
   }
+
 }

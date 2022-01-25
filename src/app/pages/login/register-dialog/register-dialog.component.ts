@@ -17,7 +17,7 @@ export class RegisterDialogComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(7),
+      Validators.minLength(8),
       this.checkPassword()]),
     username: new FormControl('', [Validators.required, Validators.maxLength(20)])
   });
@@ -40,7 +40,8 @@ export class RegisterDialogComponent implements OnInit {
         if (error instanceof HttpErrorResponse) {
           switch (error.status) {
             case (200):
-              this._snackBar.open("Weak password", "OK");
+              this.registerForm.controls['password'].setErrors({'strong' : true})
+              // this._snackBar.open("Weak password", "OK");
               break;
             case (400):
               this._snackBar.open("Email taken", "OK");
