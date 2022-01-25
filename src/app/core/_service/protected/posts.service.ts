@@ -36,9 +36,9 @@ export class PostsService {
     });
   }
 
-  public getNewerPosts(date: Date): Promise<PostInterface[]>{
+  public getNewerPosts(date: string): Promise<PostInterface[]>{
     let params = new HttpParams()
-      .set('from', date.toISOString());
+      .set('from', date.toString());
     return new Promise<PostInterface[]>((resolve, reject) => {
       this.http.get(this.URL + '/posts/new', {params: params}).subscribe(value => {
         let posts: PostInterface[] = value as PostInterface[];

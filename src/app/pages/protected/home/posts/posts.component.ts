@@ -81,12 +81,12 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   loadNewer(){
-    let date: Date;
+    let date: string;
     if (this.data.length < 1){
       let today: Date = new Date();
-      date = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7)
+      date = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7).toISOString();
     }else{
-      date = this.data[0].createdAt;
+      date = this.data[0].createdAt.toString();
     }
 
     this.postService.getNewerPosts(date).then(value => {
