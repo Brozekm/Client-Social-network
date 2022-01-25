@@ -22,7 +22,6 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
     let userRaw = localStorage.getItem('user');
     if (userRaw) {
       let user: UserInterface = JSON.parse(userRaw);
@@ -46,6 +45,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 this._snackBar.open('Server is down! Try again later', 'OK');
                 this.router.navigate(['/login']);
                 break
+              case (HttpError.Forbidden):
               case (HttpError.Unauthorized):
                 this._snackBar.open('Unauthorized', 'OK');
                 this.router.navigate(['/login']);

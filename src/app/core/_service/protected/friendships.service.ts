@@ -16,7 +16,7 @@ export class FriendshipsService {
 
   public getUsersLike(username: string): Observable<SearchedUserInterface[]> {
     let params = new HttpParams()
-      .set('name', username);
+      .set('nameLike', username);
     return new Observable(subscriber => {
       this.http.get(this.URL + '/users', {params: params})
         .subscribe(value => {

@@ -4,7 +4,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostsService} from "../../../../core/_service/protected/posts.service";
 import {EnumPostType, PostRequest} from "../../../../core/_dataTypes/postRequest";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {EnumRole} from "../../../../core/_dataTypes/user-interface";
 
 @Component({
   selector: 'app-create-post-dialog',
@@ -25,36 +24,34 @@ export class CreatePostDialogComponent implements OnInit {
 
   isAdmin: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Roles,
-    public dialogRef: MatDialogRef<CreatePostDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: boolean,
+              public dialogRef: MatDialogRef<CreatePostDialogComponent>,
               private postService: PostsService,
               private _snackBar: MatSnackBar) {
-    this.isAdmin = data.roles.some(role => role === EnumRole.ADMIN);
+    this.isAdmin = data;
   }
 
   ngOnInit(): void {
   }
 
   createPost() {
-      if (!this.addPostForm.valid) return;
+    if (!this.addPostForm.valid) return;
 
-      let message: string = this.addPostForm.controls['message'].value;
-      let postType: EnumPostType = EnumPostType.NORMAL;
-      let responseMsg: string = 'Post';
-      if (this.isChecked){
-        postType = EnumPostType.ANNOUNCEMENT;
-        responseMsg = 'Announcement';
-      }
-      let request: PostRequest = new PostRequest(message, postType);
-      this.postService.createPost(request).then(()=>{
-        this._snackBar.open(responseMsg+' created', 'OK', {duration: 2000});
-        this.dialogRef.close(true);
-      })
+    let message: string = this.addPostForm.controls['message'].value;
+    let postType: EnumPostType = EnumPostType.NORMAL;
+    let responseMsg: string = 'Post';
+    if (this.isChecked) {
+      postType = EnumPostType.ANNOUNCEMENT;
+      responseMsg = 'Announcement';
+    }
+    let request: PostRequest = new PostRequest(message, postType);
+    this.postService.createPost(request).then(() => {
+      this._snackBar.open(responseMsg + ' created', 'OK', {duration: 2000});
+      this.dialogRef.close(true);
+    })
   }
 
 }
 
-interface Roles{
-  roles: EnumRole[]
-}
+
 

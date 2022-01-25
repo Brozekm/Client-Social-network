@@ -3,6 +3,9 @@
 
     <div class="wrapper">
       <div class="side-panel">
+        <button *ngIf="isAdmin" mat-button color="primary" class="mb-4 w-100" (click)="openChangeRoleDialog()">
+          Change role
+        </button>
         <button mat-button color="primary" class="mb-4 w-100" (click)="openDialog()">
           Add post
         </button>

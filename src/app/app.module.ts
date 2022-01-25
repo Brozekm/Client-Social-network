@@ -40,6 +40,8 @@ import { PostComponent } from './pages/protected/home/posts/post/post.component'
 import { PostsComponent } from './pages/protected/home/posts/posts.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { ChatComponent } from './pages/protected/home/chat/chat.component';
+import { ChangeRoleDialogComponent } from './pages/protected/home/change-role-dialog/change-role-dialog.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -58,31 +60,33 @@ import { ChatComponent } from './pages/protected/home/chat/chat.component';
     CreatePostDialogComponent,
     PostComponent,
     PostsComponent,
-    ChatComponent
+    ChatComponent,
+    ChangeRoleDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    MatSnackBarModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSlideToggleModule,
-    FormsModule,
-    MatTooltipModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+        MatSnackBarModule,
+        MatTabsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSlideToggleModule,
+        FormsModule,
+        MatTooltipModule,
+        MatCheckboxModule
+    ],
   providers: [
     AuthGuard,
     AuthenticationService,
